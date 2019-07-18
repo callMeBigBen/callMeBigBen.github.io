@@ -3,6 +3,7 @@ import os
 path ="/home/shawn/Desktop/ConfAnalysis/manuals/result/afterMerge/manual"
 files = os.listdir(path)
 apps = ["cinder","glance","nova","placement","neutron","keystone"]
+
 '''
 1. get conf list from Teng's work
 2. define intra-component conf denpendency analysis
@@ -52,6 +53,7 @@ def intra_component_extraction(app):
 	for file in files:
 		counter = counter+1
 		f = open(path+"/"+file,"r")
+		url = file.replace("#","/")
 		content = f.readlines()
 		paras = get_paras(content)
 		print("intra",app,situation2,counter)
@@ -70,22 +72,22 @@ def intra_component_extraction(app):
 					# 	continue
 					value2 = params_after[index2]
 					single2 = int(value2[-1][0])
-					if single1 ==1 and single2 ==1:
-						if value1[0] in para_split and value2[0] in para_split:
+					if single1 ==0 and single2 ==0:
+						if value1[0] in para_split and value2[0] in para_split and value1[-2] in para_split and value2[-2] in para_split:
 							situation2[0] = situation2[0]+1
-							result.append(file +" " +value1[-2] +" " + value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
+							result.append(url +" " +value1[-2] +" " + value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
 					elif single1 ==1 and single2 ==0:
-						if value1[0] in para_split and value2[0] in para_split and value2[3] in para_split:
+						if value1[0] in para_split and value2[0] in para_split and value2[-2] in para_split:
 							situation2[1] = situation2[1]+1
-							result.append(file +" " +value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
+							result.append(url +" " +value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
 					elif single1 ==0 and single2 ==1:
-						if value1[0] in para_split and value2[0] in para_split and value1[3] in para_split:
+						if value1[0] in para_split and value2[0] in para_split and value1[-2] in para_split:
 							situation2[2] = situation2[2]+1
-							result.append(file +" " +value1[-2] +" " + value1[0] + " " + value2[0] +"\n")
-					elif single1 ==0 and single2 ==0:
-						if value1[0] in para_split and value2[0] in para_split and value2[3] in para_split and value1[3] in para_split:
+							result.append(url +" " +value1[-2] +" " + value1[0] + " " + value2[0] +"\n")
+					elif single1 ==1 and single2 ==1:
+						if value1[0] in para_split and value2[0] in para_split:
 							situation2[3] = situation2[3]+1
-							result.append(file +" " +value1[0] + " " + value2[0] +"\n") 
+							result.append(url +" " +value1[0] + " " + value2[0] +"\n") 
 						# print(situation)
 						# print(para)
 	result = list(set(result))
@@ -111,6 +113,7 @@ def inter_component_extraction(app1,app2):
 	for file in files:
 		counter = counter+1
 		f = open(path+"/"+file,"r")
+		url = file.replace("#","/")
 		content = f.readlines()
 		paras = get_paras(content)
 		print("inter",app1,app2,situation2,counter)
@@ -119,30 +122,30 @@ def inter_component_extraction(app1,app2):
 			para_split = set(para.split())
 			if para =="\n" or para=="" or len(para_split)<10:
 				continue
-			for index1 in range(len(params1_after)):
+			for index1 in range(1,len(params1_after)):
 				value1 = params1_after[index1]
 				single1 = int(value1[-1][0])
-				for index2 in range(len(params2_after)):
+				for index2 in range(1,len(params2_after)):
 					if index1==0 or index2 ==0:
 						continue
 					value2 = params2_after[index2]
 					single2 = int(value2[-1][0])
-					if single1 ==1 and single2 ==1:
-						if value1[0] in para_split and value2[0] in para_split:
+					if single1 ==0 and single2 ==0:
+						if value1[0] in para_split and value2[0] in para_split and value1[-2] in para_split and value2[-2] in para_split:
 							situation2[0] = situation2[0]+1
-							result.append(file +" " +app1 +" "+app2 +" "+value1[-2] +" " + value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
+							result.append(url +" " +app1 +" "+app2 +" "+value1[-2] +" " + value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
 					elif single1 ==1 and single2 ==0:
-						if value1[0] in para_split and value2[0] in para_split and value2[3] in para_split:
+						if value1[0] in para_split and value2[0] in para_split and value2[-2] in para_split:
 							situation2[1] = situation2[1]+1
-							result.append(file +" " +app1 +" "+app2 +" "+value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
+							result.append(url +" " +app1 +" "+app2 +" "+value1[0] + " " + value2[-2] +" " + value2[0] +"\n") 
 					elif single1 ==0 and single2 ==1:
-						if value1[0] in para_split and value2[0] in para_split and value1[3] in para_split:
+						if value1[0] in para_split and value2[0] in para_split and value1[-2] in para_split:
 							situation2[2] = situation2[2]+1
-							result.append(file +" " +app1 +" "+app2 +" "+value1[-2] +" " + value1[0] + " " + value2[0] +"\n")
-					elif single1 ==0 and single2 ==0:
-						if value1[0] in para_split and value2[0] in para_split and value2[3] in para_split and value1[3] in para_split:
+							result.append(url +" " +app1 +" "+app2 +" "+value1[-2] +" " + value1[0] + " " + value2[0] +"\n")
+					elif single1 ==1 and single2 ==1:
+						if value1[0] in para_split and value2[0] in para_split:
 							situation2[3] = situation2[3]+1
-							result.append(file +" " +app1 +" "+app2 +" "+value1[0] + " " + value2[0] +"\n") 
+							result.append(url +" " +app1 +" "+app2 +" "+value1[0] + " " + value2[0] +"\n") 
 						# print(situation)
 						# print(para)
 	result = list(set(result))
