@@ -43,6 +43,10 @@ def intra_component_extraction(app):
 	res = open("intra_component/paragraph/"+app+"_with_paragraph","w")
 	result = []
 	params = get_app_list(app)
+	params_after = []
+	for param in params:
+		param = param.split("**")
+		params_after.append(param)
 	counter = 0
 	situation2 = [0,0,0,0]
 	for file in files:
@@ -50,21 +54,21 @@ def intra_component_extraction(app):
 		f = open(path+"/"+file,"r")
 		content = f.readlines()
 		paras = get_paras(content)
-		print(situation2,counter)
+		print("intra",app,situation2,counter)
 		for para in paras:
 			para = para.replace("\n"," ")
 			para_split = set(para.split())
 			if para =="\n" or para=="" or len(para_split)<10:
 				continue
-			for index1 in range(1,len(params)):
-				for index2 in range(index1+1,len(params)):
+			for index1 in range(1,len(params_after)):
+				value1 = params_after[index1]
+				single1 = int(value1[-1][0])
+				for index2 in range(index1+1,len(params_after)):
 					# if index1==0 or index2 ==0:# do not know whether this will work
 					# 	continue
 					# if index1>=index2:
 					# 	continue
-					value1 = params[index1].split("**")
-					value2 = params[index2].split("**")
-					single1 = int(value1[-1][0])
+					value2 = params_after[index2]
 					single2 = int(value2[-1][0])
 					if single1 ==1 and single2 ==1:
 						if value1[0] in para_split and value2[0] in para_split:
@@ -93,7 +97,15 @@ def inter_component_extraction(app1,app2):
 	res = open("inter_component/paragraph/"+app1+"_"+app2+"_with_paragraph","w")
 	result = []
 	params1 = get_app_list(app1)
-	params2 = get_app_list(app1)
+	params2 = get_app_list(app2)
+	params1_after = []
+	for param in params1:
+		param = param.split("**")
+		params1_after.append(param)
+	params2_after = []
+	for param in params2:
+		param = param.split("**")
+		params2_after.append(param)
 	counter = 0
 	situation2 = [0,0,0,0]
 	for file in files:
@@ -101,19 +113,19 @@ def inter_component_extraction(app1,app2):
 		f = open(path+"/"+file,"r")
 		content = f.readlines()
 		paras = get_paras(content)
-		print(situation2,counter)
+		print("inter",app1,app2,situation2,counter)
 		for para in paras:
 			para = para.replace("\n"," ")
 			para_split = set(para.split())
 			if para =="\n" or para=="" or len(para_split)<10:
 				continue
-			for index1 in range(len(params1)):
-				for index2 in range(len(params2)):
+			for index1 in range(len(params1_after)):
+				value1 = params1_after[index1]
+				single1 = int(value1[-1][0])
+				for index2 in range(len(params2_after)):
 					if index1==0 or index2 ==0:
 						continue
-					value1 = params1[index1].split("**")
-					value2 = params2[index2].split("**")
-					single1 = int(value1[-1][0])
+					value2 = params2_after[index2]
 					single2 = int(value2[-1][0])
 					if single1 ==1 and single2 ==1:
 						if value1[0] in para_split and value2[0] in para_split:
