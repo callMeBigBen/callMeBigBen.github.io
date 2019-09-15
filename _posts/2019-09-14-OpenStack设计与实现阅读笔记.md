@@ -59,7 +59,59 @@
 
 **a classic paragraph to desc the relationships btw components **
 
-![image-20190914025158498](images/image-20190914025158498.png)**
+![image-20190914025158498](images/image-20190914025158498.png)
+
+- **插播：看了linus torvalds早年在google做的git宣传pre，发现原来linus是个narcissist hhhh. Git的设计理念确实很强：分布式+branch的想法让不同expertise的人各司其职。**
+
+- 橡皮鸭调试法hhhhh
+
+- ![image-20190914163625725](images/image-20190914163625725.png)
+
+- ![image-20190914225046493](images/image-20190914225046493.png)
+  - 虚拟化的主流实现方式
+
+    1. 直接在硬件驱动上进行封装(Xen)
+    2. 在操作系统上进行封装(KVM, VirtualBox)
+
+    ![image-20190914225620568](images/image-20190914225620568.png)
+
+  - 主流虚拟化服务提供商
+
+    1. VMware, 基于操作系统的虚拟化
+    2. Xen，通过修改linux kernel，实现硬件的虚拟化
+    3. KVM，也是基于硬件的虚拟化，作为模块运行在linux内核上
+
+  - 虚拟化管理工具：VMM本身只提供虚拟化的基础架构，最后和用户相关的工作还是要通过虚拟化管理工具来实现
+
+    1. XenAPI
+       ![image-20190914231537188](images/image-20190914231537188.png)
+    2. libvirt
+       ![image-20190914231647429](images/image-20190914231647429.png)
+
+  - RESTful: Representation State Transfer表现层状态迁移
+
+    - 用URI表示资源，用HTML谓词（get, post, delete, update, etc.）表示描述操作
+
+  - 协程(coroutine): 是进城的子单位
+
+    1. 拥有自己的栈和局部变量
+    2. 与统一进程下的其他协程共享全局变量
+    3. 与线程不一样：不会并发执行，而是被执行协程阻塞了，另一个协程接手执行
+    4. 不需要考虑锁的问题，舒服
+    5. 执行顺序和时间长短由用户自己决定，舒服（线程由OS决定）
+    6. 本质是线程内的伪并发
+
+  - Eventlet: python lib to provide coroutine support
 
 
 
+## Nova
+
+- architecture
+  ![image-20190915005250712](images/image-20190915005250712.png)
+- four core module: 
+  1. API
+  2.  compute: interact with VMM
+  3. scheduler: choose the phy node to deploy new VM
+  4. conductor: abstraction for DB acces
+     - Communicate through AMQP(advanced message queue protocol)
