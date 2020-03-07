@@ -18,29 +18,50 @@ header-img: "img/nevada.jpg"
 
     <!--copied from markdown -->
     <blockquote><h2>Better get your brain spinning and your hands dirty</h2></blockquote>
+    <p>I'm<strong> Xuan Peng</strong>. </p>
+    <!-- <del>Currently I'm doing
+            system-related research in <strong>UIUC</strong> as an <strong>intern
+            </strong>thanks for the great opportunity provided by <strong>Prof.Tianyin
+                Xu.</strong></del> -->
+    <!-- now -->
+    <p>I'm a CS undergraduate at Wuhan University, China.<br>I'm now interning
+        at ByteDance as a backend engineer.</p>
+    <!-- previously -->
+    <p>Previously, I interned at UIUC and did research about verification and
+        improvement of system reliability by exploiting
+        Program Analysis and Data Mining.<br>
+        Prior to that, I served as the research assistant of Artificial
+        Intelligence
+        Lab and participated in the research of Machine
+        Learning applied Bioinformatics research. <br>
+        Thanks for those interesting experiences and people I've met on this
+        road!</p>
+    <!-- misc -->
+    <p>I love experiencing and learning all kinds of fresh and interesting
+        things.<br>
+        I enjoy the process of finding out the fundamental
+        reason/essence of
+        problems. I'm interested in building interesting and
+        state-of-the-art
+        system.<br>
+        I like reading materials about history.</p>
 
-    <p>I'm<strong> Xuan Peng</strong>，a CS undergraduate at <strong>Wuhan University</strong>, China.<br><del>Currently I'm doing system-related research in <strong>UIUC</strong> as an <strong>intern </strong>thanks for the great opportunity provided by <strong>Prof.Tianyin Xu.</strong></del><br><strong>I'm now an intern backend engineer at ByteDance Ltd, Beijing.</strong></p>
 
-    <p>I was a basketball enthusiast in the past until I met my GF :( <br> I loves experiencing and learning all kinds of <strong>fresh and interesting things</strong>. I enjoy the process of finding out the <strong>fundamental reason/essence of problems. I'm interested in building interesting and state-of-the-art system.</strong><br>I love reading materials about history and politics.</p>
+    <p><a
+            href="https://github.com/callMeBigBen/callMeBigBen.github.io/blob/master/resources/CV.pdf">Here
+            is the link to my CV</p>
 
-    <p><strong><del>I'm actively seeking for a PhD positon in general system area.<del></strong></p> 
-     <p><strong>I've determined to pursue a master's degree and devote myself to the industry asap. Wish me good luck!</strong></p>
-     <p>My previous research work includes <strong>verification and improvement of system reliability</strong> by exploiting <strong>Program Analysis and Data Mining techniques.</strong> Prior to that, I  served as a research assistant in WHU for <strong>Machine Learning applied Bioinformatics research</strong>. Thanks for these interesting experiences and the comrades on research road!</p>
+        <h5>Tech</h5>
 
+        <ul>
+            <li><a href="https://github.com">GitHub</a></li>
+            <li><a href="https://analytics.google.com/analytics">Google
+                    Analytics</a></li>
+        </ul>
+    </div>
 
-
-    <p><a href="https://github.com/callMeBigBen/callMeBigBen.github.io/blob/master/resources/CV.pdf">Here is the link to my CV</p>
-    
-    <h5>Tech</h5>
-
-    <ul>
-        <li><a href="https://github.com">GitHub</a></li>
-        <li><a href="https://analytics.google.com/analytics">Google Analytics</a></li>
-    </ul>
-</div>
-
-<!-- English Version -->
-<!-- <div class="en post-container">
+    <!-- English Version -->
+    <!-- <div class="en post-container">
     <blockquote><p>Yet another iOS Developer. <br>
     Yet another Life-long Student.</p></blockquote>
 
@@ -60,8 +81,8 @@ header-img: "img/nevada.jpg"
     </ul>
 </div> -->
 
-<!-- Handle Language Change -->
-<script type="text/javascript">
+    <!-- Handle Language Change -->
+    <script type="text/javascript">
     // get nodes
     var $zh = document.querySelector(".zh");
     var $en = document.querySelector(".en");
@@ -101,13 +122,13 @@ header-img: "img/nevada.jpg"
 </script>
 
 
-<!-- Gitalk 评论 start  -->
-{% if site.gitalk.enable %}
-<!-- Gitalk link  -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
+    <!-- Gitalk 评论 start  -->
+    {% if site.gitalk.enable %}
+    <!-- Gitalk link  -->
+    <link rel="stylesheet"
+        href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+    <div id="gitalk-container"></div>
     <script type="text/javascript">
     var gitalk = new Gitalk({
     clientID: '{{site.gitalk.clientID}}',
@@ -120,20 +141,20 @@ header-img: "img/nevada.jpg"
     });
     gitalk.render('gitalk-container');
 </script>
-{% endif %}
-<!-- Gitalk end -->
+    {% endif %}
+    <!-- Gitalk end -->
 
- <!-- disqus 评论框 start  -->
-{% if site.disqus.enable %}
+    <!-- disqus 评论框 start  -->
+    {% if site.disqus.enable %}
 
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
+    <div class="comment">
+        <div id="disqus_thread" class="disqus-thread">
+        </div>
     </div>
-</div>
-<!-- disqus 评论框 end -->
+    <!-- disqus 评论框 end -->
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
+    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus.username}}";
     var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
@@ -145,6 +166,5 @@ header-img: "img/nevada.jpg"
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- disqus 公共JS代码 end -->
-{% endif %}
-
+    <!-- disqus 公共JS代码 end -->
+    {% endif %}
